@@ -1,26 +1,21 @@
-import { useState } from 'react';
+import { useState } from 'react'
 import { IpInfoCard } from './components/IpInfoCard'
-import { useIP } from './hooks/useIP';
+import { useIP } from './hooks/useIP'
 
-function App() {
-
+function App () {
   const [input, setInput] = useState('')
   const { ipInfo, searchIpInfo, userIp, error, loading } = useIP()
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const { ip } = ipInfo
-    if (
-      (input === ip) || 
-      (input === '' && ip === userIp)
-    ){
+    if (input === ip || (input === '' && ip === userIp)) {
       setInput('')
       return
     }
-
-    if (input === ''){
+    if (input === '') {
       searchIpInfo(userIp)
-    }else{
+    } else {
       searchIpInfo(input)
       setInput('')
     }
@@ -34,8 +29,8 @@ function App() {
     <>
       <h1 className='main-title'>IP Geolocation</h1>
       <form onSubmit={handleSubmit}>
-        <input 
-          type="text" 
+        <input
+          type='text'
           placeholder={userIp ?? 'IP...'}
           value={input}
           onChange={handleChange}
@@ -43,15 +38,8 @@ function App() {
         <button>Search</button>
       </form>
       <IpInfoCard ipInfo={ipInfo} />
-      {
-        error &&
-        <p className='error-message'>
-          {error}
-        </p>
-      }
-      {
-        loading && <div className='loading-circle'></div>
-      }
+      {error && <p className='error-message'>{error}</p>}
+      {loading && <div className='loading-circle' />}
     </>
   )
 }

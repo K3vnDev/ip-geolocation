@@ -1,14 +1,14 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from 'react'
 const GET_USER_IP_API_URL = 'https://api.ipify.org'
-const GET_IP_INFO_API_URL = ip => `https://ipapi.co/${ip}/json/`
+const GET_IP_INFO_API_URL = (ip) => `https://ipapi.co/${ip}/json/`
 
 export const useIP = () => {
-  const [ ipInfo, setIpInfo ] = useState(false)
-  const [ error, setError ] = useState('')
-  const [ loading, setLoading ] = useState(true)
-  const [ userIp, setUserIp ] = useState()
-   
-  const getUserIp = useCallback( async() => {
+  const [ipInfo, setIpInfo] = useState(false)
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(true)
+  const [userIp, setUserIp] = useState()
+
+  const getUserIp = useCallback(async () => {
     try {
       const response = await fetch(GET_USER_IP_API_URL)
       const result = await response.text()
@@ -25,22 +25,20 @@ export const useIP = () => {
     const response = await fetch(GET_IP_INFO_API_URL(ip))
     const res = await response.json()
 
-    if (typeof(res.error) === 'undefined'){
+    if (typeof res.error === 'undefined') {
       setLoading(false)
-      setIpInfo(
-        {
-          ...res,
-          lat: res.latitude,
-          lon: res.longitude,
-          countryCode: res.country,
-          country: res.country_name,
-        }
-      )
+      setIpInfo({
+        ...res,
+        lat: res.latitude,
+        lon: res.longitude,
+        countryCode: res.country,
+        country: res.country_name
+      })
       setError('')
-    }else{
+    } else {
       setLoading(false)
       setIpInfo(false)
-      if (error === ''){
+      if (error === '') {
         setError('No se ha encontrado la IP')
         setTimeout(() => {
           setError('')
@@ -52,6 +50,6 @@ export const useIP = () => {
   useEffect(() => {
     getUserIp()
   }, [getUserIp])
-  
+
   return { ipInfo, searchIpInfo, userIp, error, loading }
 }

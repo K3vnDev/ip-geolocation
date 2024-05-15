@@ -1,9 +1,13 @@
-.ip-info-wrapper{ /*Hijo directo de root*/
+.ip-info-wrapper{
   margin-top: 50px;
   width: 100%;
-  max-width: 500px;
-}
+  max-width: 700px;
+  gap: 30px 20px;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .ip-data{
   display: flex;
@@ -24,7 +28,6 @@
   max-width: 100%;
   width: auto;
 }
-
 
 .net-info{
   display: flex;
@@ -103,4 +106,10 @@
 .location-info .time-zone, .location-info .lat-lon{
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.map-wrapper{
+  height: 320px;
+  width: 320px;
+  border-radius: 10px;
 }
