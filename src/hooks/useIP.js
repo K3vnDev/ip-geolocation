@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react"
-const GET_USER_IP_API_URL = 'https://api.ipify.org'
 const GET_IP_INFO_API_URL = 'http://ip-api.com/json/'
 
 export const useIP = () => {
@@ -8,13 +7,7 @@ export const useIP = () => {
   const [ loading, setLoading ] = useState(true)
    
   const getUserIp = useCallback( async() => {
-    try {
-      const response = await fetch(GET_USER_IP_API_URL)
-      const result = await response.text()
-      searchIpInfo(result)
-    } catch (error) {
-      console.error(error)
-    }
+    searchIpInfo('')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   const searchIpInfo = async (ip) => {
@@ -30,7 +23,7 @@ export const useIP = () => {
         {
           ...result,
           region: result.regionName,
-          ip: ip
+          ip: result.query
         }
       )
       setError('')

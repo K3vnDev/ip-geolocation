@@ -27,7 +27,7 @@ function App() {
       <form onSubmit={handleSubmit}>
         <input 
           type="text" 
-          placeholder="IP..."
+          placeholder={ipInfo.ip ?? 'IP...'}
           value={input}
           onChange={handleChange}
         />
