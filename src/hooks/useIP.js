@@ -17,7 +17,6 @@ export const useIP = () => {
     } catch (error) {
       console.error(error)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   const searchIpInfo = async (ip) => {
     setIpInfo(false)
