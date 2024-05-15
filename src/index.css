@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background: #010104;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+#root{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  margin: 0 20px;
+}
+
+.main-title{
+  color: white;
+  font-family: 'Poppins', system-ui;
+  font-size: 50px;
+  font-weight: 600;
+  margin-top: 60px;
+  text-align: center;
+  text-wrap: nowrap;
+}
+
+@media screen and (max-width: 600px) {
+  .main-title{
+    font-size: 40px;
+  }
+}
+@media screen and (max-width: 300px) {
+  .main-title{
+    font-size: 30px;
+  }
+}
+
+form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  gap: 15px;
+  width: 100%;
+}
+input{
+  max-width: 180px;
+  min-width: 125px;
+  width: 100%;
+
+  padding: 14px;
+  border-radius: 5px;
+  border: 2px solid #0F0934;
+  background: transparent;
+  color: #babbc7;
+  font-size: 17px;
+  font-family: 'Poppins';
+  outline: none;
+
+  &::placeholder{
+    color: #7173887e;
+    font-size: 17px;
+    font-family: 'Poppins';
+  }
+
+  transition: all .2s ease-out;
+  &:hover{
+    border: 2px solid #140c4c;
+  }
+  &:focus{
+    border: 2px solid #1a0d6c;
+    box-shadow: 0 0 10px #1a0d6c;
+  }
+}
+button{
+  padding: 14px 22px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Poppins';
+  border: 2px solid #0F0934;
+  background: #0F0934;
+  color: #cfd0d9;
+
+  transition: all .2s ease-out;
+  &:hover{
+    border: 2px solid #140c4c;
+    box-shadow: 0 0 10px #1a0d6c;
+  }
+  &:active{
+    transform: translateY(5px);
+    box-shadow: none;
+  }
+}
+.error-message{
+  font-size: 20px;
+  color: #ba3131;
+  font-family: system-ui;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 10px;
+
+  animation: error-msg-disappear 3s ease-out both;
+}
+@keyframes error-msg-disappear {
+  75%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+
+
+.loading-circle{
+  --size: 60px;
+
+  width: var(--size);
+  height: var(--size);
+  margin: 100px auto;
+  border-radius: 50%;
+  background: linear-gradient(
+    to right, #120b45, #1c0e79
+  );
+  
+
+  &::before{
+    --size: 70%;
+
+    content: '';
+    width: var(--size);
+    height: var(--size);
+    background: #010104;
+    border-radius: 50%;
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  animation: 
+    loading-spin 1.25s linear infinite,
+    loading-popup .15s ease-out both
+  ;
+}
+@keyframes loading-spin{
+  to{
+    transform: rotate(360deg);
+  }
+}
+@keyframes loading-popup{
+  from{
+    scale: .85;
+  }
+  to{
+    scale: 1;
+  }
+}
