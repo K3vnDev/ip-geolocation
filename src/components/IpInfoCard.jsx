@@ -22,10 +22,10 @@ function NetInfo({ ipInfo }) {
   return (
     <section className="net-info info-section">
       <div className="ip">
-        <small>IPv4</small>
+        <small>{ipInfo.version}</small>
         <h3>{ipInfo.ip}</h3>
       </div>
-      <p>{ipInfo.isp}</p>
+      <p>{ipInfo.org}</p>
     </section>
   )
 }

@@ -5,15 +5,24 @@ import { useIP } from './hooks/useIP';
 function App() {
 
   const [input, setInput] = useState('')
-  const { ipInfo, searchIpInfo, error, loading } = useIP()
+  const { ipInfo, searchIpInfo, userIp, error, loading } = useIP()
 
   const handleSubmit = async(e) => {
     e.preventDefault()
-    if (input !== ''){
+    const { ip } = ipInfo
+    if (
+      (input === ip) || 
+      (input === '' && ip === userIp)
+    ){
       setInput('')
-      if (input !== ipInfo.ip && !loading){
-        searchIpInfo(input)
-      }
+      return
+    }
+
+    if (input === ''){
+      searchIpInfo(userIp)
+    }else{
+      searchIpInfo(input)
+      setInput('')
     }
   }
 
@@ -27,7 +36,7 @@ function App() {
       <form onSubmit={handleSubmit}>
         <input 
           type="text" 
-          placeholder="IP..."
+          placeholder={userIp ?? 'IP...'}
           value={input}
           onChange={handleChange}
         />
